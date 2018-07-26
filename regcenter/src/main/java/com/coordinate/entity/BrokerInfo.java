@@ -2,6 +2,11 @@ package com.coordinate.entity;
 
 import lombok.Data;
 
+/**
+ * created by zsunny
+ * Email zsunny@yeah.net
+ * Date on 2018/7/26.
+ */
 @Data
 public class BrokerInfo {
 

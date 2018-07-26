@@ -1,7 +1,10 @@
 package com.coordinate.entity;
 
-import org.omg.CORBA.UNKNOWN;
-
+/**
+ * created by zsunny
+ * Email zsunny@yeah.net
+ * Date on 2018/7/26.
+ */
 public class ResponseType {
 
     public static final Response<Object> SIMPLE_SUCCESS = new Response<Object>(CodeType.SUCCESS,"success",null);

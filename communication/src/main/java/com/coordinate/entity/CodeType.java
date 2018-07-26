@@ -1,5 +1,10 @@
 package com.coordinate.entity;
 
+/**
+ * created by zsunny
+ * Email zsunny@yeah.net
+ * Date on 2018/7/26.
+ */
 public class CodeType {
 
     public static final int SUCCESS = 0;
