@@ -15,8 +15,6 @@ import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateHandler;
-
-import java.io.FileNotFoundException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +24,11 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class HeartBeatsServer {
-    private static int port;
+
+    private static Broker broker;
+    static {
+        broker=FileUtils.loadBroker();
+    }
 
 
   public static boolean start(){
@@ -34,7 +36,7 @@ public class HeartBeatsServer {
       EventLoopGroup bossGroup = new NioEventLoopGroup(1);
       EventLoopGroup workerGroup = new NioEventLoopGroup();
       try {
-          ServerBootstrap sbs = new ServerBootstrap().group(bossGroup,workerGroup).channel(NioServerSocketChannel.class).handler(new LoggingHandler(LogLevel.INFO)).localAddress(new InetSocketAddress(port))
+          ServerBootstrap sbs = new ServerBootstrap().group(bossGroup,workerGroup).channel(NioServerSocketChannel.class).handler(new LoggingHandler(LogLevel.INFO)).localAddress(new InetSocketAddress(broker.getPort()))
                   .childHandler(new ChannelInitializer<SocketChannel>() {
                       protected void initChannel(SocketChannel ch) throws Exception {
                           ch.pipeline().addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS));
@@ -46,7 +48,7 @@ public class HeartBeatsServer {
                   }).option(ChannelOption.SO_BACKLOG, 128)
                   .childOption(ChannelOption.SO_KEEPALIVE, true);
           // 绑定端口，开始接收进来的连接
-          ChannelFuture future = sbs.bind(port).sync();
+          ChannelFuture future = sbs.bind(broker.getPort()).sync();
           future.channel().closeFuture().sync();
       } catch (Exception e) {
           success=false;
@@ -58,11 +60,6 @@ public class HeartBeatsServer {
 
       return success;
   }
-
-    public static void main(String[] args) {
-
-    }
-
 }
 
 

@@ -1,9 +1,4 @@
-package com.coordinate.network;/*
-Administrator
-2018/7/26
-Describtion:
-Version:1.0v
-*/
+package com.coordinate.network;
 
 import com.coordinate.entity.Broker;
 import com.coordinate.utils.FileUtils;
@@ -11,8 +6,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
-
-import java.io.FileNotFoundException;
 
 /**
  * @author dabai_cai
@@ -25,11 +18,7 @@ public class HeartBeatServerHandler extends ChannelInboundHandlerAdapter {
     private static Broker broker;
 
     static {
-        try {
             broker=FileUtils.loadBroker();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -51,8 +40,12 @@ public class HeartBeatServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         Broker remoteBrokerInfo=(Broker)msg;
-        //TODO 返回响应信息给注册机，下班了！！！！！！！！！！
-        ctx.channel().writeAndFlush("");
+
+        //auth
+        if(remoteBrokerInfo.getId()!=broker.getId()||!remoteBrokerInfo.getName().equalsIgnoreCase(broker.getName())){
+            ctx.channel().writeAndFlush(broker);
+        }
+
     }
 
     @Override
