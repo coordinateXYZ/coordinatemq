@@ -15,6 +15,7 @@
         <module>producer</module>
         <module>consumer</module>
         <module>regcenter</module>
+        <module>base</module>
     </modules>
 
     <dependencies>
@@ -33,6 +34,19 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.17</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.17</version>
+        </dependency>
+
 
     </dependencies>
 
