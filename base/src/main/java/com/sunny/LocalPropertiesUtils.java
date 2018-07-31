@@ -1,5 +1,7 @@
 package com.sunny;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
@@ -12,6 +14,7 @@ import java.net.URL;
  */
 public class LocalPropertiesUtils {
 
+    private static final Logger log = LoggerFactory.getLogger(LocalPropertiesUtils.class);
 
     public static Object loadProperties(String path) throws IOException {
 
