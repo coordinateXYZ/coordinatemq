@@ -1,4 +1,4 @@
-package com.sunny;
+package com.coordinate.annotation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +22,8 @@ public class LocalPropertiesUtils {
 
         Object o =  yaml.load(readFile(path));
 
-        System.out.println(o);
-        System.out.println(o.getClass());
-
         return o;
+
     }
 
     /**
